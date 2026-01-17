@@ -1,15 +1,69 @@
 <?php
 namespace LazarusPhp\ExceptionHandler;
 
+use App\System\Core\Functions;
 use LogicException;
 use Throwable;
+
 class ExceptionDispatcher
 {
-    private array $listeners;
+    private array $listeners = [];
+    private static array $registeredListeners = [];
 
-    public function __construct(array $listeners)
+    public function __construct()
     {
-        $this->listeners = $listeners;
+        // Count Registered Listeners
+
+        // Loop Registered Listeners
+
+        // Create new Listener 
+
+    }
+
+    public function add(string|array $listener)
+    {
+        if(is_string($listener))
+        {
+            $this->listeners[] = $listener;
+        }
+        else
+        {
+            $this->listeners = $listener;
+        }
+    }
+
+    public  function autoloadListeners()
+    {
+        if(count(self::$registeredListeners)){
+            foreach(self::$registeredListeners as $key => $listener)
+            {
+                if(!array_key_exists($listener,$this->listeners)){
+                    echo $listener . "Added" . "<br>";
+                    $this->add($listener);
+                }
+                else
+                {
+                    echo "$listener already Exists";
+                }
+            }
+        }
+    }
+
+    public static function registerListener(string $listener):void
+    {
+        if(is_string($listener))
+        {
+            self::$registeredListeners[] = $listener;
+        }
+        elseif(is_array($listener))
+        {
+            self::$registeredListeners = $listener;
+        }
+        else
+        {
+            throw new LogicException("Request Parameter must be a string or array");
+        }  
+        
     }
 
     public function dispatch(Throwable $e)
@@ -59,4 +113,9 @@ class ExceptionDispatcher
         echo "Unhandled Exception". $e->getMessage();
     }
 
+    public function __destruct()
+    {
+        $this->listeners = [];
+        self::$registeredListeners = [];
+    }
 }
