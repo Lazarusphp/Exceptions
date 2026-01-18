@@ -1,8 +1,8 @@
 <?php
 namespace LazarusPhp\ExceptionHandler;
 
-use App\System\Core\Functions;
 use LogicException;
+use Psr\Log\LoggerInterface;
 use Throwable;
 
 class ExceptionDispatcher
@@ -11,20 +11,20 @@ class ExceptionDispatcher
     private static array $registeredListeners = [];
 
     public function __construct()
-    {
-        // Count Registered Listeners
-
-        // Loop Registered Listeners
-
-        // Create new Listener 
-
+    {  
     }
 
-    public function add(string|array $listener)
+    public function add(?array $listener=null):void
     {
-        if(is_string($listener))
+
+        if($listener === null || count($listener) ===0) 
         {
-            $this->listeners[] = $listener;
+            throw new LogicException("Parameter Cannot be empty");
+        }
+
+        if(count($listener) === 1)
+        {
+            $this->listeners[] = $listener[0];
         }
         else
         {
@@ -32,37 +32,30 @@ class ExceptionDispatcher
         }
     }
 
-    public  function autoloadListeners()
+    public function autoloadListeners()
     {
         if(count(self::$registeredListeners)){
             foreach(self::$registeredListeners as $key => $listener)
             {
-                if(!array_key_exists($listener,$this->listeners)){
-                    echo $listener . "Added" . "<br>";
-                    $this->add($listener);
-                }
-                else
-                {
-                    echo "$listener already Exists";
-                }
+                $this->add($listener);
             }
         }
     }
 
-    public static function registerListener(string $listener):void
+    public static function registerListener(?array $listener=null):void
     {
-        if(is_string($listener))
+
+        switch($listener)
         {
-            self::$registeredListeners[] = $listener;
+            case (count($listener) === 0): throw new LogicException("Parameter must have a value");
+            break;
+            case ($listener ===null): throw new LogicException("Parameter Must hold an Array Value");
+            break;
+            case ($listener === 1) : self::$registeredListeners[] = $listener[0];
+            break;
+            default:self::$registeredListeners = $listener;
         }
-        elseif(is_array($listener))
-        {
-            self::$registeredListeners = $listener;
-        }
-        else
-        {
-            throw new LogicException("Request Parameter must be a string or array");
-        }  
+
         
     }
 

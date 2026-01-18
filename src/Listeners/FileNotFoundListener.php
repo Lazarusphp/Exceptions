@@ -2,9 +2,15 @@
 namespace LazarusPhp\ExceptionHandler\Listeners;
 use LazarusPhp\ExceptionHandler\Exceptions\FileNotFoundException;
 use Throwable;
+use Psr\Log\LoggerInterface;
 
 class FileNotFoundListener implements ExceptionListener
 {
+
+    public function __construct(private LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
     public function support(Throwable $e):bool
     {
         return $e  instanceof FileNotFoundException;
