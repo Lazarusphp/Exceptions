@@ -2,12 +2,12 @@
 namespace LazarusPhp\Exceptions\Listeners;
 
 use LazarusPhp\Exceptions\Exceptions\DirectoryNotFoundException;
-use LazarusPhp\Exceptions\Exceptions\FileNotFoundException;
 use LazarusPhp\Logger\Level;
+use LazarusPhp\Exceptions\Interfaces\ExceptionListenerInterface;
 use Psr\Log\LoggerInterface;
 use Throwable;
 
-class DirectoryNotFoundListener implements ExceptionListener
+class DirectoryNotFoundListener implements ExceptionListenerInterface
 {
     private LoggerInterface $logger;
     public function __construct(LoggerInterface $logger)

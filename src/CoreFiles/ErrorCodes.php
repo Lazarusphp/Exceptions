@@ -1,5 +1,5 @@
 <?php
-namespace LazarusPhp\ExceptionHandler;
+namespace LazarusPhp\Exceptions;
 
 final class ErrorCodes
 {

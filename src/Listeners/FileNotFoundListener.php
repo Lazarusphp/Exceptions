@@ -1,10 +1,11 @@
 <?php
 namespace LazarusPhp\Exceptions\Listeners;
 use LazarusPhp\Exceptions\Exceptions\FileNotFoundException;
+use LazarusPhp\Exceptions\Interfaces\ExceptionListenerInterface;
 use Throwable;
 use Psr\Log\LoggerInterface;
 
-class FileNotFoundListener implements ExceptionListener
+class FileNotFoundListener implements ExceptionListenerInterface
 {
 
     public function __construct(private LoggerInterface $logger)

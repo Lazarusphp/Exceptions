@@ -1,9 +1,9 @@
 <?php
-namespace LazarusPhp\Exceptions\Listeners;
+namespace LazarusPhp\Exceptions\Interfaces;
 
 use Throwable;
 
-interface ExceptionListener
+interface ExceptionListenerInterface
 {
     public function support(Throwable $e):bool;
     public function handle(Throwable $e):void;

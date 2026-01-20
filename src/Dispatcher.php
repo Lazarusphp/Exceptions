@@ -8,7 +8,7 @@ class Dispatcher
 {
     private array $listeners = [];
     private static array $registeredListeners = [];
-
+    
     public function __construct()
     {  
     }

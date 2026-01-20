@@ -1,6 +1,6 @@
 <?php
 
-namespace LazarusPhp\ExceptionHandler;
+namespace LazarusPhp\Exceptions\CoreFiles;
 
 use RuntimeException;
 
