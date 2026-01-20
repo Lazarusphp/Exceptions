@@ -3,6 +3,7 @@ namespace LazarusPhp\ExceptionHandler\Listeners;
 
 use LazarusPhp\ExceptionHandler\Exceptions\DirectoryNotFoundException;
 use LazarusPhp\ExceptionHandler\Exceptions\FileNotFoundException;
+use LazarusPhp\ExceptionHandler\Logging\Level;
 use Psr\Log\LoggerInterface;
 use Throwable;
 
@@ -26,20 +27,20 @@ class DirectoryNotFoundListener implements ExceptionListener
             return;
         }
 
-        $this->logger->warning("Directory Not Found",
+        $this->logger->warning($e->getMessage(),
         ["file"=>$e->getFile(),
         "Status Code"=>$e->getStatusCode(),
         "path"=>$e->getPath(),
-        "User"=>$e->getCode()
+        "ErrorCode" => $e->getCode(),
+        "Level"=>Level::Warning->label(),
         ]);
-        $user = "Martin";
-        $this->logger->error("User Accessed Restricted Drive {$user}");
 
         http_response_code($e->getStatusCode());
         echo json_encode([
-            'error' => 'Directory Not found',
+            'error' => $e->getMessage(),
             'message' => $e->getMessage(),
             'code' => $e->getCode(),
+            'level'=> Level::Warning->label(),
         ],JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
     }
 }
