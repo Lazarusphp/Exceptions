@@ -3,7 +3,7 @@ namespace LazarusPhp\ExceptionHandler\Listeners;
 
 use LazarusPhp\ExceptionHandler\Exceptions\DirectoryNotFoundException;
 use LazarusPhp\ExceptionHandler\Exceptions\FileNotFoundException;
-use LazarusPhp\ExceptionHandler\Logging\Level;
+use LazarusPhp\Logger\Level;
 use Psr\Log\LoggerInterface;
 use Throwable;
 
