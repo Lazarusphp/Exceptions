@@ -1,6 +1,6 @@
 <?php
-namespace LazarusPhp\ExceptionHandler\Exceptions;
-use LazarusPhp\ExceptionHandler\ExceptionCore;
+namespace LazarusPhp\Exceptions\Exceptions;
+use LazarusPhp\Exceptions\ExceptionCore;
 use Throwable;
 
 class FileNotFoundException extends ExceptionCore

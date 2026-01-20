@@ -1,6 +1,6 @@
 <?php
-namespace LazarusPhp\ExceptionHandler\Listeners;
-use LazarusPhp\ExceptionHandler\Exceptions\FileNotFoundException;
+namespace LazarusPhp\Exceptions\Listeners;
+use LazarusPhp\Exceptions\Exceptions\FileNotFoundException;
 use Throwable;
 use Psr\Log\LoggerInterface;
 

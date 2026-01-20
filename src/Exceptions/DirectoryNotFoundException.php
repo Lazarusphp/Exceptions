@@ -1,7 +1,7 @@
 <?php
-namespace LazarusPhp\ExceptionHandler\Exceptions;
-use LazarusPhp\ExceptionHandler\ExceptionCore;
-use LazarusPhp\ExceptionHandler\Logging\Logger;
+namespace LazarusPhp\Exceptions\Exceptions;
+use LazarusPhp\Exceptions\ExceptionCore;
+use LazarusPhp\Exceptions\Logging\Logger;
 use Psr\Log\LoggerInterface;
 use Throwable;
 

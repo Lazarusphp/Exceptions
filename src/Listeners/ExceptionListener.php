@@ -1,5 +1,5 @@
 <?php
-namespace LazarusPhp\ExceptionHandler\Listeners;
+namespace LazarusPhp\Exceptions\Listeners;
 
 use Throwable;
 
