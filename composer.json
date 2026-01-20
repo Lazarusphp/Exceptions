@@ -1,0 +1,19 @@
+{
+    "name": "lazarausphp/exceptions",
+    "description": "Php Exception Handler For lazarusphp",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "LazarausPhp\\Exceptions\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "itzzpadre"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "lazarusphp/logger":"^1.0"
+    }
+}
