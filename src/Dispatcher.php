@@ -11,7 +11,7 @@ class Dispatcher
     
     public function __construct()
     {  
-    }
+     }
 
     public function add(?array $listener=null):void
     {
@@ -30,6 +30,8 @@ class Dispatcher
             $this->listeners = $listener;
         }
     }
+
+
 
     public function autoloadListeners()
     {
@@ -110,4 +112,6 @@ class Dispatcher
         $this->listeners = [];
         self::$registeredListeners = [];
     }
+
+
 }
