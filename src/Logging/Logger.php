@@ -5,19 +5,14 @@ use LogicException;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 
-class Logger implements LoggerInterface
+
+abstract class Logger implements LoggerInterface
 {
-    private static string $file = "";
+    protected string $file = "";
 
-    public function __construct(string $file)
+    final public function getFile()
     {
-
-        if(!is_string($file))
-        {
-            throw new LogicException("Must be a file");
-        }
-
-        self::$file = $file;
+        return $this->file;
     }
 
     private function interpolate(string $message,array $context):string
@@ -25,28 +20,32 @@ class Logger implements LoggerInterface
         // Set new Array for map replacment
         $replace = [];
 
+        // Loop Context
         foreach($context as $key => $value)
         {
+        // Validate if it is a scaler type string, int or float
             if(is_scalar($value))
             {
+            // Create a new Array
                 $replace['{'.$key.'}'] = $value;
             }
         }
 
+        // return new Mapping
         return strtr($message,$replace);
     }
 
     private function normalise(array $context)
     {
-          foreach ($context as $key => $value) {
-        if ($value instanceof \Throwable) {
-            $context[$key] = [
-                'type' => get_class($value),
-                'message' => $value->getMessage(),
-                'code' => $value->getCode(),
-                'file' => $value->getFile(),
-                'line' => $value->getLine(),
-            ];
+        foreach ($context as $key => $value) {
+            if ($value instanceof \Throwable) {
+                $context[$key] = [
+                    'type' => get_class($value),
+                    'message' => $value->getMessage(),
+                    'code' => $value->getCode(),
+                    'file' => $value->getFile(),
+                    'line' => $value->getLine(),
+                ];
             }
         }
     
@@ -109,7 +108,7 @@ class Logger implements LoggerInterface
         PHP_EOL
     );
 
-    file_put_contents(self::$file, $line, FILE_APPEND | LOCK_EX);
+    file_put_contents($this->file, $line, FILE_APPEND | LOCK_EX);
     }
 
 }
