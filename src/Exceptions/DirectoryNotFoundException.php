@@ -11,9 +11,7 @@ class DirectoryNotFoundException extends ExceptionCore
 
     // Directory Status Code 403
     protected int $statuscode = 403;
-
-    private LoggerInterface $logger;
-
+    
     public function __construct(string $directory)
     {
         $this->directory = $directory;
